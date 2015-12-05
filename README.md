@@ -8,5 +8,6 @@ An **Arduino** robot controlled by the Accelerometer reading from Android
 
 ## Current Progress
 * Android app able to sense accelerometer data ---> [done]
+![android_app](http://i.imgur.com/LrxbKu4.png)
 * Android app able to send data from android set to an arduino board via HC-05 ---> [under progress]
 * Design a mathematical function able to classify the data --> [future work]
