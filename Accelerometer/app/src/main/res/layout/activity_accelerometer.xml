@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:descendantFocusability="beforeDescendants"
+    android:focusableInTouchMode="true"
+    tools:context="electroscholars.com.accelerometer.AccelerometerActivity">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Raw Values"
+        android:id="@+id/valueView"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/valueView"
+        android:layout_alignParentStart="true"
+        android:id="@+id/linearLayout">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="X-Axis:"
+            android:id="@+id/xaxisTextView"
+            android:layout_alignBottom="@+id/xaxisTextEdit"
+            android:layout_alignParentStart="true" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/xaxisTextEdit"
+            android:layout_below="@+id/valueView"
+            android:layout_toEndOf="@+id/linearLayout"
+            android:textColor="#038b43" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/linearLayout2"
+        android:layout_below="@+id/linearLayout"
+        android:layout_alignParentStart="true">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Y-Axis"
+            android:id="@+id/yaxisTextView"
+            android:layout_alignBottom="@+id/yaxisEditText"
+            android:layout_alignParentStart="true" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/yaxisEditText"
+            android:layout_below="@+id/valueView"
+            android:layout_toEndOf="@+id/linearLayout"
+            android:textColor="#771818" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/linearLayout3"
+        android:layout_below="@+id/linearLayout2"
+        android:layout_alignParentStart="true">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Z-Axis:"
+            android:id="@+id/zaxisTextView"
+            android:layout_alignBottom="@+id/zaxisEditText"
+            android:layout_alignParentStart="true" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/zaxisEditText"
+            android:layout_below="@+id/valueView"
+            android:layout_toEndOf="@+id/linearLayout"
+            android:textColor="#1e0490" />
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Linear Acceleration"
+        android:id="@+id/linerAccelerationTextView"
+        android:layout_below="@+id/linearLayout3"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="36dp" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/linearLayout4"
+        android:layout_below="@+id/linerAccelerationTextView"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="33dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="X-Axis:"
+            android:id="@+id/textView"
+            android:layout_alignBottom="@+id/xaxisLAEditText"
+            android:layout_alignParentStart="true" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/xaxisLAEditText"
+            android:layout_below="@+id/valueView"
+            android:layout_toEndOf="@+id/linearLayout"
+            android:textColor="#038b43" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/linearLayout5"
+        android:layout_below="@+id/linearLayout4"
+        android:layout_alignParentStart="true">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Y-Axis"
+            android:id="@+id/textView2"
+            android:layout_alignBottom="@+id/yaxisLAEditText"
+            android:layout_alignParentStart="true" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/yaxisLAEditText"
+            android:layout_below="@+id/valueView"
+            android:layout_toEndOf="@+id/linearLayout"
+            android:textColor="#771818" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/linearLayout6"
+        android:layout_below="@+id/linearLayout5"
+        android:layout_alignParentStart="true">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Z-Axis:"
+            android:id="@+id/textView3"
+            android:layout_alignBottom="@+id/zaxisLAEditText"
+            android:layout_alignParentStart="true" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/zaxisLAEditText"
+            android:layout_below="@+id/valueView"
+            android:layout_toEndOf="@+id/linearLayout"
+            android:textColor="#1e0490" />
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Magnitude: "
+        android:id="@+id/magnitudeTextView"
+        android:layout_marginTop="30dp"
+        android:layout_below="@+id/linearLayout6"
+        android:layout_alignParentStart="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/magnitudeEditText"
+        android:textColor="#1e0490"
+        android:layout_alignTop="@+id/magnitudeTextView"
+        android:layout_toEndOf="@+id/magnitudeTextView" />
+
+</RelativeLayout>
