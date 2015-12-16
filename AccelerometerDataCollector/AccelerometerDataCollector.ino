@@ -1,10 +1,15 @@
 #include <SoftwareSerial.h>
+#include <Motor.h>
+
+motorpins pins = {2, 3,4,5};
+
+Motor motor(pins);
 
 int led = 13;
 
-SoftwareSerial bt(10, 11); //rx tx
+SoftwareSerial bt(51, 52); //rx tx
 
-float values = 0;
+float values = -100;
 
 void setup() {
   // put your setup code here, to run once:
@@ -17,9 +22,10 @@ void loop() {
   // put your main code here, to run repeatedly:
   if (bt.available() > 0){
     values = bt.parseFloat();
+    Serial.println(values);
     delay(10);
   }
 
-  if (values > -7) digitalWrite(led, HIGH);
-  else digitalWrite(led, LOW);
+  if (values > -7) {digitalWrite(led, HIGH); motor.go(100, 100, FORWARD); }
+  else { digitalWrite(led, LOW); motor.go(0, 0, NOWHERE); }
 }
