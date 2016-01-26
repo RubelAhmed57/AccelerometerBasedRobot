@@ -18,6 +18,7 @@ import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothSocket;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.hardware.SensorEvent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -138,6 +139,10 @@ public class MainActivity extends Activity {
 		accelerometerManager = (SensorManager) this.getSystemService(SENSOR_SERVICE);
 		accelerometer = accelerometerManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
 		accelerometerManager.registerListener(listener, accelerometer, SensorManager.SENSOR_DELAY_NORMAL);
+
+
+		//Locking orientation
+		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
 	}
 

@@ -1,6 +1,8 @@
 #include <SoftwareSerial.h>
 #include <Motor.h>
 
+int speed = 100;
+
 motorpins pins = {2, 3, 4, 5};
 
 Motor motor(pins);
@@ -51,29 +53,58 @@ void loop() {
     delay(10);
   }
 
+
   if (x_value > -8 && x_value < -3){
-    Serial.println("FORWARD");
-    motor.go(255, 255, FORWARD);
-  }
-
-  else if (x_value > 3 && x_value < 8){
     Serial.println("BACKWARD");
-    motor.go(255, 255, BACKWARD);
+    motor.go(speed, speed, BACKWARD);
   }
 
-  else if (y_value > -8 && y_value < -3){
-    Serial.println("LEFT");
-    motor.go(0, 255, LEFT);
+    else if (x_value > 3 && x_value < 8){
+    Serial.println("FORWARD");
+    motor.go(speed, speed, FORWARD);
   }
 
-  else if (y_value > 3 && y_value < 8){
+    else if (y_value > 3 && y_value < 8){
     Serial.println("RIGHT");
-    motor.go(255, 0, RIGHT);
+    motor.go(speed, 0, RIGHT);
+  }
+
+
+    else if (y_value > -8 && y_value < -3){
+    Serial.println("LEFT");
+    motor.go(0, speed, LEFT);
   }
 
   else {
     motor.go(0, 0, NOWHERE);
   }
+  
+
+//  if (x_value > -8 && x_value < -3){
+//    Serial.println("FORWARD");
+//    motor.go(255, 255, FORWARD);
+//  }
+//
+//  else if (x_value > 3 && x_value < 8){
+//    Serial.println("BACKWARD");
+//    motor.go(255, 255, BACKWARD);
+//  }
+//
+//  else if (y_value > -8 && y_value < -3){
+//    Serial.println("LEFT");
+//    motor.go(0, 255, LEFT);
+//  }
+//
+//  else if (y_value > 3 && y_value < 8){
+//    Serial.println("RIGHT");
+//    motor.go(255, 0, RIGHT);
+//  }
+//
+//  else {
+//    motor.go(0, 0, NOWHERE);
+//  }
+
+
 
 //  if (x_value > -10 && x_value < -3) {
 //    

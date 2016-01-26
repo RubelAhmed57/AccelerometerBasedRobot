@@ -126,6 +126,8 @@ public class Homescreen extends Activity {
 				startActivity(intent);
 			}
 		});
+
+		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 	}
 
 	/**
