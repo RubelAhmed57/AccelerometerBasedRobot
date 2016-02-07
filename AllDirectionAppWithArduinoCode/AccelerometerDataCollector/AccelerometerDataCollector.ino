@@ -3,7 +3,7 @@
 
 int speed = 100;
 
-motorpins pins = {2, 3, 4, 5};
+motorpins pins = {3, 5, 6, 9};
 
 Motor motor(pins);
 
