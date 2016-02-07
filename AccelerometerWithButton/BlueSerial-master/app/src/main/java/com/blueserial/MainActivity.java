@@ -29,6 +29,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -37,6 +38,14 @@ import android.hardware.SensorManager;
 import android.hardware.Sensor;
 
 public class MainActivity extends Activity {
+
+	public enum ControlMode{
+		ACCELEROMETER,
+		BUTTON
+	}
+
+	public ControlMode controlMode;
+
 	public int x_values;
 	public int y_values;
 
@@ -189,6 +198,27 @@ public class MainActivity extends Activity {
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
+		}
+	}
+
+	//Check control mode
+	public void onRadioButtonClicked(View view){
+		boolean checked = ((RadioButton) view).isChecked();
+
+		//Check the mode
+		switch (view.getId()){
+			case R.id.accelerometerRadioButton:
+				if (checked){
+					Log.i(TAG, "Accelerometer was chosen");
+				}
+				break;
+
+			case R.id.buttonRadioButton:
+				if (checked){
+					Log.i(TAG, "Button Control was chosen");
+				}
+				break;
+
 		}
 	}
 
