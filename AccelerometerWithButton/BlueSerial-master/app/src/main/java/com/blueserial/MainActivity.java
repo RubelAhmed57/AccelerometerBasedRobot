@@ -24,6 +24,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -108,6 +109,11 @@ public class MainActivity extends Activity {
 		xValueTextView = (TextView) findViewById(R.id.xValue);
 		yValueTextView = (TextView) findViewById(R.id.yValue);
 
+		left = (Button) findViewById(R.id.leftButton);
+		right = (Button) findViewById(R.id.rightButton);
+		forward = (Button) findViewById(R.id.forwardButton);
+		backward = (Button) findViewById(R.id.backwardButton);
+
 
 
 		mBtnDisconnect.setOnClickListener(new OnClickListener() {
@@ -119,26 +125,7 @@ public class MainActivity extends Activity {
 			}
 		});
 
-//		mBtnSend.setOnClickListener(new OnClickListener() {
-//
-//			@Override
-//			public void onClick(View arg0) {
-//				try {
-//					mBTSocket.getOutputStream().write(mEditSend.getText().toString().getBytes());
-//				} catch (IOException e) {
-//					// TODO Auto-generated catch block
-//					e.printStackTrace();
-//				}
-//			}
-//		});
 
-//		mBtnClear.setOnClickListener(new OnClickListener() {
-//
-//			@Override
-//			public void onClick(View arg0) {
-////				mEditSend.setText("");
-//			}
-//		});
 		
 		mBtnClearInput.setOnClickListener(new OnClickListener() {
 			
@@ -162,6 +149,51 @@ public class MainActivity extends Activity {
 		//Setting app name
 		this.setTitle(APP_NAME);
 
+		//Button touch event
+		forward.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				sendData(view);
+			}
+		});
+
+		backward.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				sendData(view);
+			}
+		});
+
+		left.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				sendData(view);
+			}
+		});
+
+		right.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				sendData(view);
+			}
+		});
+
+	}
+
+	//Writes string to arduino port
+	public void sendStringToArduino(String input){
+		if (mBTSocket.isConnected()) {
+			try {
+
+				mBTSocket.getOutputStream().write(input.getBytes());
+				//mBTSocket.getOutputStream().write(String.valueOf(y_values).getBytes());
+				Thread.sleep(2);
+			} catch (IOException e) {
+				e.printStackTrace();
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
 	}
 
 
@@ -236,6 +268,41 @@ public class MainActivity extends Activity {
 
 		}
 	}
+
+	//Send data
+	public void sendData(View view){
+
+		if (controlMode == ControlMode.BUTTON) {
+
+
+			switch (view.getId()) {
+				case R.id.forwardButton:
+					Log.i(TAG, "FORWARD");
+					sendStringToArduino("~FORWARD\n");
+					break;
+
+				case R.id.backwardButton:
+					Log.i(TAG, "BACKWARD");
+					sendStringToArduino("~BACKWARD\n");
+					break;
+
+				case R.id.leftButton:
+					Log.i(TAG, "LEFT");
+					sendStringToArduino("~LEFT\n");
+					break;
+
+				case R.id.rightButton:
+					Log.i(TAG, "RIGHT");
+					sendStringToArduino("~RIGHT\n");
+					break;
+			}
+		} else {
+			Toast.makeText(getApplicationContext(), "Select Button Control Mode first", Toast
+					.LENGTH_SHORT).show();
+		}
+
+	}
+
 
 
 	private class ReadInput implements Runnable {
