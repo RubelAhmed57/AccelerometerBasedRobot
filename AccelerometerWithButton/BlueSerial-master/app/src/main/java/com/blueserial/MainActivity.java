@@ -77,6 +77,7 @@ public class MainActivity extends Activity {
 	private Button forward;
 	private Button right;
 	private Button backward;
+	private Button stop;
 
 	private boolean mIsBluetoothConnected = false;
 
@@ -113,7 +114,7 @@ public class MainActivity extends Activity {
 		right = (Button) findViewById(R.id.rightButton);
 		forward = (Button) findViewById(R.id.forwardButton);
 		backward = (Button) findViewById(R.id.backwardButton);
-
+		stop = (Button) findViewById(R.id.stopButton);
 
 
 		mBtnDisconnect.setOnClickListener(new OnClickListener() {
@@ -128,10 +129,8 @@ public class MainActivity extends Activity {
 
 		
 		mBtnClearInput.setOnClickListener(new OnClickListener() {
-			
 			@Override
 			public void onClick(View arg0) {
-//				mTxtReceive.setText("");
 			}
 		});
 
@@ -172,6 +171,13 @@ public class MainActivity extends Activity {
 		});
 
 		right.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				sendData(view);
+			}
+		});
+
+		stop.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View view) {
 				sendData(view);
@@ -244,6 +250,9 @@ public class MainActivity extends Activity {
 
 	//Check control mode
 	public void onRadioButtonClicked(View view){
+
+		sendStringToArduino("~STOP");
+
 		boolean checked = ((RadioButton) view).isChecked();
 
 		//Check the mode
@@ -295,6 +304,15 @@ public class MainActivity extends Activity {
 					Log.i(TAG, "RIGHT");
 					sendStringToArduino("~RIGHT\n");
 					break;
+
+				case R.id.stopButton:
+					Log.i(TAG, "STOP");
+					sendStringToArduino("~STOP\n");
+					break;
+
+				default:
+					sendStringToArduino("~STOP\n");
+					break;
 			}
 		} else {
 			Toast.makeText(getApplicationContext(), "Select Button Control Mode first", Toast
@@ -342,29 +360,7 @@ public class MainActivity extends Activity {
 						 */
 
 						if (chkReceiveText.isChecked()) {
-//							mTxtReceive.post(new Runnable() {
-//								@Override
-//								public void run() {
-//									mTxtReceive.append(strInput);
-//									//Uncomment below for testing
-//									//mTxtReceive.append("\n");
-//									//mTxtReceive.append("Chars: " + strInput.length() + " Lines: " + mTxtReceive.getLineCount() + "\n");
-//
-//									int txtLength = mTxtReceive.getEditableText().length();
-//									if(txtLength > mMaxChars){
-//										mTxtReceive.getEditableText().delete(0, txtLength - mMaxChars);
-//									}
-//
-//									if (chkScroll.isChecked()) { // Scroll only if this is checked
-//										scrollView.post(new Runnable() { // Snippet from http://stackoverflow.com/a/4612082/1287554
-//													@Override
-//													public void run() {
-//														scrollView.fullScroll(View.FOCUS_DOWN);
-//													}
-//												});
-//									}
-//								}
-//							});
+
 						}
 
 					}

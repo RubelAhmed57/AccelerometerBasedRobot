@@ -155,6 +155,17 @@
                 android:id="@+id/backwardButton"
                 android:layout_below="@+id/leftButton"
                 android:layout_centerHorizontal="true"/>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Stop"
+                android:id="@+id/stopButton"
+                android:layout_below="@+id/forwardButton"
+                android:layout_toLeftOf="@+id/rightButton"
+                android:layout_alignBottom="@+id/leftButton"
+                android:layout_alignLeft="@+id/forwardButton"
+                android:layout_alignStart="@+id/forwardButton"/>
         </RelativeLayout>
     </GridLayout>
 
