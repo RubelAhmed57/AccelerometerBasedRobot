@@ -128,6 +128,9 @@ public class Homescreen extends Activity {
 		});
 
 		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+
+		//Setting app name
+		this.setTitle(MainActivity.APP_NAME);
 	}
 
 	/**

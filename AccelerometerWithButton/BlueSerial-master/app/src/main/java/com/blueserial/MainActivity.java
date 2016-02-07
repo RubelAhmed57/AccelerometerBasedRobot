@@ -39,6 +39,9 @@ import android.hardware.Sensor;
 
 public class MainActivity extends Activity {
 
+	//App name
+	public static final String APP_NAME = "Robot Controller";
+
 	public enum ControlMode{
 		ACCELEROMETER,
 		BUTTON
@@ -153,6 +156,12 @@ public class MainActivity extends Activity {
 		//Locking orientation
 		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
+		//Initializing Control mode
+		controlMode = ControlMode.ACCELEROMETER;
+
+		//Setting app name
+		this.setTitle(APP_NAME);
+
 	}
 
 
@@ -209,13 +218,19 @@ public class MainActivity extends Activity {
 		switch (view.getId()){
 			case R.id.accelerometerRadioButton:
 				if (checked){
+					controlMode = ControlMode.ACCELEROMETER;
 					Log.i(TAG, "Accelerometer was chosen");
+					Toast.makeText(getApplicationContext(), "Accelerometer Control Activated!",
+							Toast.LENGTH_LONG).show();
 				}
 				break;
 
 			case R.id.buttonRadioButton:
 				if (checked){
+					controlMode = ControlMode.BUTTON;
 					Log.i(TAG, "Button Control was chosen");
+					Toast.makeText(getApplicationContext(), "Button Control Activated!", Toast
+							.LENGTH_LONG).show();
 				}
 				break;
 

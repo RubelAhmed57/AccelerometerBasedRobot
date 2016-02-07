@@ -23,6 +23,7 @@ public class PreferencesActivity extends PreferenceActivity implements OnSharedP
 		super.onCreate(savedInstanceState);
 		ActivityHelper.initialize(this);
 		addPreferencesFromResource(R.xml.preferences); // Using this for compatibility with Android 2.2 devices
+		this.setTitle(MainActivity.APP_NAME);
 	}
 
 	public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
