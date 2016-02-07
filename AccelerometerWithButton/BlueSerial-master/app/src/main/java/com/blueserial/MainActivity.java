@@ -72,6 +72,10 @@ public class MainActivity extends Activity {
 	private CheckBox chkReceiveText;
 	private TextView xValueTextView;
 	private TextView yValueTextView;
+	private Button left;
+	private Button forward;
+	private Button right;
+	private Button backward;
 
 	private boolean mIsBluetoothConnected = false;
 
@@ -97,10 +101,6 @@ public class MainActivity extends Activity {
 		Log.d(TAG, "Ready");
 
 		mBtnDisconnect = (Button) findViewById(R.id.btnDisconnect);
-//		mBtnSend = (Button) findViewById(R.id.btnSend);
-//		mBtnClear = (Button) findViewById(R.id.btnClear);
-//		mTxtReceive = (TextView) findViewById(R.id.txtReceive);
-//		mEditSend = (EditText) findViewById(R.id.editSend);
 		scrollView = (ScrollView) findViewById(R.id.viewScroll);
 		chkScroll = (CheckBox) findViewById(R.id.chkScroll);
 		chkReceiveText = (CheckBox) findViewById(R.id.chkReceiveText);
@@ -108,7 +108,7 @@ public class MainActivity extends Activity {
 		xValueTextView = (TextView) findViewById(R.id.xValue);
 		yValueTextView = (TextView) findViewById(R.id.yValue);
 
-//		mTxtReceive.setMovementMethod(new ScrollingMovementMethod());
+
 
 		mBtnDisconnect.setOnClickListener(new OnClickListener() {
 
@@ -194,7 +194,7 @@ public class MainActivity extends Activity {
 		xValueTextView.setText(String.valueOf(x_values));
 		yValueTextView.setText(String.valueOf(y_values));
 
-		if (mBTSocket.isConnected()){
+		if (mBTSocket.isConnected() && controlMode == ControlMode.ACCELEROMETER){
 			try {
 
 				String accelerometerData = "(" + String.valueOf(x_values) + "," + String.valueOf(y_values) + ")\n";
