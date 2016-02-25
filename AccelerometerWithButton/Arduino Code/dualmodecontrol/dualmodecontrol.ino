@@ -14,9 +14,9 @@ enum ControlMode {ACCELEROMETER, BUTTON};
 ControlMode controlMode;
 
 //Motor pin configs
-motorPins pins = {6, 9, 3, 5};
+//motorPins pins = {6, 9, 3, 5};
 
-//motorPins pins = {3, 5, 6, 9};
+motorPins pins = {3, 5, 6, 9};
 
 Motor motor(pins);
 

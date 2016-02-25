@@ -88,6 +88,12 @@ public class MainActivity extends Activity {
 	Sensor accelerometer;
 	SensorManager accelerometerManager;
 
+	final private String forwardCommand = "~FORWARD\n";
+	final private String backwardCommand = "~BACKWARD\n";
+	final private String leftCommand = "~LEFT\n";
+	final private String rightCommand = "~RIGHT\n";
+	final private String stopCommand = "~STOP\n";
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -148,39 +154,63 @@ public class MainActivity extends Activity {
 		//Setting app name
 		this.setTitle(APP_NAME);
 
-		//Button touch event
-		forward.setOnClickListener(new OnClickListener() {
+		forward.setOnTouchListener(new View.OnTouchListener() {
 			@Override
-			public void onClick(View view) {
-				sendData(view);
+			public boolean onTouch(View view, MotionEvent motionEvent) {
+				if (controlMode == ControlMode.BUTTON) {
+					if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) sendStringToArduino
+							(forwardCommand);
+					else if (motionEvent.getAction() == MotionEvent.ACTION_UP) sendStringToArduino
+							(stopCommand);
+				}
+				return true;
 			}
 		});
 
-		backward.setOnClickListener(new OnClickListener() {
+		backward.setOnTouchListener(new View.OnTouchListener() {
 			@Override
-			public void onClick(View view) {
-				sendData(view);
+			public boolean onTouch(View view, MotionEvent motionEvent) {
+				if (controlMode == ControlMode.BUTTON){
+					if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) sendStringToArduino
+							(backwardCommand);
+					else if (motionEvent.getAction() == MotionEvent.ACTION_UP)
+						sendStringToArduino(stopCommand);
+				}
+				return true;
 			}
 		});
 
-		left.setOnClickListener(new OnClickListener() {
+		left.setOnTouchListener(new View.OnTouchListener() {
 			@Override
-			public void onClick(View view) {
-				sendData(view);
+			public boolean onTouch(View view, MotionEvent motionEvent) {
+				if (controlMode == ControlMode.BUTTON){
+					if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) sendStringToArduino
+							(leftCommand);
+					else if (motionEvent.getAction() == MotionEvent.ACTION_UP)
+						sendStringToArduino(stopCommand);
+				}
+				return true;
 			}
 		});
 
-		right.setOnClickListener(new OnClickListener() {
+		right.setOnTouchListener(new View.OnTouchListener() {
 			@Override
-			public void onClick(View view) {
-				sendData(view);
+			public boolean onTouch(View view, MotionEvent motionEvent) {
+				if (controlMode == ControlMode.BUTTON){
+					if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) sendStringToArduino
+							(rightCommand);
+					else if (motionEvent.getAction() == MotionEvent.ACTION_UP)
+						sendStringToArduino(stopCommand);
+				}
+				return true;
 			}
 		});
 
-		stop.setOnClickListener(new OnClickListener() {
+		stop.setOnTouchListener(new View.OnTouchListener() {
 			@Override
-			public void onClick(View view) {
-				sendData(view);
+			public boolean onTouch(View view, MotionEvent motionEvent) {
+				sendStringToArduino(stopCommand);
+				return true;
 			}
 		});
 
