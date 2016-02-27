@@ -17,7 +17,10 @@ import android.app.ProgressDialog;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothSocket;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.pm.ActivityInfo;
 import android.hardware.SensorEvent;
 import android.os.AsyncTask;
@@ -77,9 +80,12 @@ public class MainActivity extends Activity {
 	private Button forward;
 	private Button right;
 	private Button backward;
-	private Button stop;
+	private Button kick;
+	private Button motionKick;
 
 	private boolean mIsBluetoothConnected = false;
+
+	private int RSSI = 0;
 
 	private BluetoothDevice mDevice;
 
@@ -93,6 +99,9 @@ public class MainActivity extends Activity {
 	final private String leftCommand = "~LEFT\n";
 	final private String rightCommand = "~RIGHT\n";
 	final private String stopCommand = "~STOP\n";
+	final private String kickCommand = "~KICK\n";
+
+
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -101,7 +110,7 @@ public class MainActivity extends Activity {
 		ActivityHelper.initialize(this);
 
 		Intent intent = getIntent();
-		Bundle b = intent.getExtras();
+		final Bundle b = intent.getExtras();
 		mDevice = b.getParcelable(Homescreen.DEVICE_EXTRA);
 		mDeviceUUID = UUID.fromString(b.getString(Homescreen.DEVICE_UUID));
 		mMaxChars = b.getInt(Homescreen.BUFFER_SIZE);
@@ -109,18 +118,14 @@ public class MainActivity extends Activity {
 		Log.d(TAG, "Ready");
 
 		mBtnDisconnect = (Button) findViewById(R.id.btnDisconnect);
-		scrollView = (ScrollView) findViewById(R.id.viewScroll);
-		chkScroll = (CheckBox) findViewById(R.id.chkScroll);
-		chkReceiveText = (CheckBox) findViewById(R.id.chkReceiveText);
-		mBtnClearInput = (Button) findViewById(R.id.btnClearInput);
-		xValueTextView = (TextView) findViewById(R.id.xValue);
-		yValueTextView = (TextView) findViewById(R.id.yValue);
+
 
 		left = (Button) findViewById(R.id.leftButton);
 		right = (Button) findViewById(R.id.rightButton);
 		forward = (Button) findViewById(R.id.forwardButton);
 		backward = (Button) findViewById(R.id.backwardButton);
-		stop = (Button) findViewById(R.id.stopButton);
+		kick = (Button) findViewById(R.id.kickButton);
+		motionKick = (Button) findViewById(R.id.motionKickButton);
 
 
 		mBtnDisconnect.setOnClickListener(new OnClickListener() {
@@ -133,12 +138,7 @@ public class MainActivity extends Activity {
 		});
 
 
-		
-		mBtnClearInput.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View arg0) {
-			}
-		});
+
 
 		accelerometerManager = (SensorManager) this.getSystemService(SENSOR_SERVICE);
 		accelerometer = accelerometerManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
@@ -153,6 +153,8 @@ public class MainActivity extends Activity {
 
 		//Setting app name
 		this.setTitle(APP_NAME);
+
+
 
 		forward.setOnTouchListener(new View.OnTouchListener() {
 			@Override
@@ -206,15 +208,37 @@ public class MainActivity extends Activity {
 			}
 		});
 
-		stop.setOnTouchListener(new View.OnTouchListener() {
+		kick.setOnTouchListener(new View.OnTouchListener() {
 			@Override
 			public boolean onTouch(View view, MotionEvent motionEvent) {
-				sendStringToArduino(stopCommand);
+				if (controlMode == ControlMode.BUTTON) {
+					if (motionEvent.getAction() == MotionEvent.ACTION_DOWN)
+						sendStringToArduino(kickCommand);
+					else if (motionEvent.getAction() == MotionEvent.ACTION_UP) sendStringToArduino
+							(stopCommand);
+				}
 				return true;
 			}
 		});
 
+		motionKick.setOnTouchListener(new View.OnTouchListener() {
+			@Override
+			public boolean onTouch(View view, MotionEvent motionEvent) {
+				if (controlMode == ControlMode.ACCELEROMETER){
+					if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) sendStringToArduino(kickCommand);
+					else if (motionEvent.getAction() == MotionEvent.ACTION_UP)
+						sendStringToArduino(stopCommand);
+				}
+				return true;
+			}
+		});
+
+
 	}
+
+
+
+
 
 	//Writes string to arduino port
 	public void sendStringToArduino(String input){
@@ -259,8 +283,7 @@ public class MainActivity extends Activity {
 		x_values = (int) sensorEvent.values[0];
 		y_values = (int) sensorEvent.values[1];
 
-		xValueTextView.setText(String.valueOf(x_values));
-		yValueTextView.setText(String.valueOf(y_values));
+
 
 		if (mBTSocket.isConnected() && controlMode == ControlMode.ACCELEROMETER){
 			try {
@@ -335,10 +358,6 @@ public class MainActivity extends Activity {
 					sendStringToArduino("~RIGHT\n");
 					break;
 
-				case R.id.stopButton:
-					Log.i(TAG, "STOP");
-					sendStringToArduino("~STOP\n");
-					break;
 
 				default:
 					sendStringToArduino("~STOP\n");
@@ -389,9 +408,6 @@ public class MainActivity extends Activity {
 						 * If checked then receive text, better design would probably be to stop thread if unchecked and free resources, but this is a quick fix
 						 */
 
-						if (chkReceiveText.isChecked()) {
-
-						}
 
 					}
 					Thread.sleep(500);

@@ -19,33 +19,6 @@
             android:layout_weight="5"
             android:text="Disconnect" />
 
-        <Button
-            android:id="@+id/btnClearInput"
-            android:layout_width="0dp"
-            android:layout_height="fill_parent"
-            android:layout_weight="5"
-            android:text="Clear Input" />
-
-        <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical" >
-
-            <CheckBox
-                android:id="@+id/chkScroll"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="0dp"
-                android:checked="true"
-                android:text="Scroll" />
-
-            <CheckBox
-                android:id="@+id/chkReceiveText"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:checked="true"
-                android:text="Read" />
-        </LinearLayout>
     </LinearLayout>
 
     <ScrollView
@@ -78,7 +51,7 @@
         <RadioButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Accelerometer "
+            android:text="Motion Control"
             android:id="@+id/accelerometerRadioButton"
             android:onClick="onRadioButtonClicked"
             android:checked="true"/>
@@ -159,8 +132,8 @@
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Stop"
-                android:id="@+id/stopButton"
+                android:text="Kick"
+                android:id="@+id/kickButton"
                 android:layout_below="@+id/forwardButton"
                 android:layout_toLeftOf="@+id/rightButton"
                 android:layout_alignBottom="@+id/leftButton"
@@ -172,43 +145,14 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Accelerometer Data:"
-        android:id="@+id/textView4"/>
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Motion Based Controller"
+        android:id="@+id/textView"/>
 
-    <TableRow
-        android:layout_width="match_parent"
+    <Button
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingTop="10dp">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text="x:       "
-            android:id="@+id/xTextView" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text="0.00"
-            android:id="@+id/xValue" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text="          y:       "
-            android:id="@+id/textView"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text="0.00"
-            android:id="@+id/yValue"/>
-
-    </TableRow>
+        android:text="Kick"
+        android:id="@+id/motionKickButton"/>
 
 </LinearLayout> <!-- </RelativeLayout> -->

@@ -6,6 +6,7 @@
 
     <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
 
     <uses-sdk
         android:minSdkVersion=" 8"
@@ -23,9 +24,7 @@
             android:configChanges="orientation"
             android:windowSoftInputMode="adjustResize|stateHidden"
             >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-            </intent-filter>
+
         </activity>
         <activity
             android:name="com.blueserial.Homescreen"
@@ -38,6 +37,8 @@
             </intent-filter>
         </activity>
         <activity android:name="PreferencesActivity"></activity>
+
+
     </application>
 
 </manifest>
