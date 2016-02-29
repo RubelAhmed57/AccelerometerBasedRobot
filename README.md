@@ -7,8 +7,9 @@ An **Arduino** robot controlled by the Accelerometer reading from Android
 * Analyze the recorded accelerometer data for further processing for getting the almost accurate direction that robot should go
 
 ## Current Progress
-* Android app able to sense accelerometer data ---> [done]
-![android_app](http://i.imgur.com/LrxbKu4.png)
-* Android app able to send data from android set to an arduino board via HC-05 ---> [under progress]
-![android_bluetooth_app](http://i.imgur.com/Wvbb71L.png)
-* Design a mathematical function able to classify the data --> [future work]
+* Can Send Data to Arduino 
+* Both Accelerometer & Button Mode have been added 
+
+### Current App Interface:
+![app-ui](https://camo.githubusercontent.com/edb344081ac6f007a7c3ab20248e58eeec8ba4d8/687474703a2f2f692e696d6775722e636f6d2f4c756a377164322e706e67)
+
